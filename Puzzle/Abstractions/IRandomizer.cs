@@ -1,4 +1,4 @@
-﻿namespace Puzzle
+﻿namespace Puzzle.Abstractions
 {
     /// <summary>
     /// Represents an interface for classes that are intended to randomize some values.

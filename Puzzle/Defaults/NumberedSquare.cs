@@ -1,4 +1,6 @@
-﻿namespace Puzzle
+﻿using Puzzle.Abstractions;
+
+namespace Puzzle.Defaults
 {
     /// <summary>
     /// Represents a square instance that uses a number as a value to display itself.

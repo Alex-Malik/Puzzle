@@ -1,4 +1,4 @@
-﻿namespace Puzzle
+﻿namespace Puzzle.Abstractions
 {
     /// <summary>
     /// Represents the base class for the squares used in the game.

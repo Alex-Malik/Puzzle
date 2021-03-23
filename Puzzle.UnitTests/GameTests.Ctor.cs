@@ -2,11 +2,12 @@
 using System.Linq;
 using Moq;
 using NUnit.Framework;
+using Puzzle.Abstractions;
 
 
 namespace Puzzle.UnitTests
 {
-    public class GameTests_Ctor
+    public partial class GameTests
     {
         [Test]
         public void Ctor_AsUsual()
@@ -20,7 +21,7 @@ namespace Puzzle.UnitTests
         [Test]
         public void Ctor_SquareFactoryIsNull_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() =>
+            Assert.Throws<ArgumentNullException>(() =>
             {
                 var game = new Game(null);
             });

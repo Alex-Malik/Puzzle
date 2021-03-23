@@ -1,5 +1,6 @@
 using System.Linq;
 using Moq;
+using Puzzle.Abstractions;
 
 namespace Puzzle.UnitTests
 {

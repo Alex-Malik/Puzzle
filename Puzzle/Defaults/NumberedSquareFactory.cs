@@ -1,6 +1,7 @@
 ﻿using System;
+using Puzzle.Abstractions;
 
-namespace Puzzle
+namespace Puzzle.Defaults
 {
     /// <summary>
     /// Represents a factory that produces the <see cref="NumberedSquare"/> objects.

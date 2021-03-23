@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Puzzle.Abstractions;
+using Puzzle.Defaults;
 
 namespace Puzzle.Terminal
 {

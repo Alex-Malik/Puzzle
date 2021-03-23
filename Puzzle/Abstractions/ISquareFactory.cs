@@ -1,4 +1,4 @@
-﻿namespace Puzzle
+﻿namespace Puzzle.Abstractions
 {
     /// <summary>
     /// Represents a factory which is when implemented intended to produce <see cref="Square"/>s.

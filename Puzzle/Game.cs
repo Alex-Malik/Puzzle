@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Puzzle.Abstractions;
+using Puzzle.Defaults;
 using Puzzle.Exceptions;
 
 namespace Puzzle
@@ -32,6 +35,9 @@ namespace Puzzle
         /// </summary>
         public Game(ISquareFactory squareFactory, IRandomizer randomizer = null)
         {
+            if (squareFactory == null)
+                throw new ArgumentNullException(nameof(squareFactory));
+            
             _squareFactory = squareFactory;
             _randomizer = randomizer ?? new DefaultRandomizer();
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Puzzle.Abstractions;
 
-namespace Puzzle
+namespace Puzzle.Defaults
 {
     /// <summary>
     /// Represents a default mechanism to randomize a sequence of the sequential numbers.

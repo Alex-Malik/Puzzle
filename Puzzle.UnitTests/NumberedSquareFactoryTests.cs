@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Puzzle.Defaults;
 
 namespace Puzzle.UnitTests
 {
@@ -28,14 +29,12 @@ namespace Puzzle.UnitTests
         }
 
         [Test]
-        public void CreateByPosition_PositionIsOutOfRange_ThrowsOutOfRangeException()
+        public void CreateByPosition_PositionIsLessThenZero_ThrowsArgumentException()
         {
             var squareFactory = new NumberedSquareFactory();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => squareFactory.CreateByPosition(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => squareFactory.CreateByPosition(-13));
-            Assert.Throws<ArgumentOutOfRangeException>(() => squareFactory.CreateByPosition(16));
-            Assert.Throws<ArgumentOutOfRangeException>(() => squareFactory.CreateByPosition(100));
+            Assert.Throws<ArgumentException>(() => squareFactory.CreateByPosition(-1));
+            Assert.Throws<ArgumentException>(() => squareFactory.CreateByPosition(-13));
         }
     }
 }

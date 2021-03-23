@@ -2,6 +2,7 @@
 using System.Linq;
 using Moq;
 using NUnit.Framework;
+using Puzzle.Exceptions;
 
 namespace Puzzle.UnitTests
 {
@@ -48,7 +49,7 @@ namespace Puzzle.UnitTests
             
             game.Start();
 
-            Assert.Throws<Exception>(() => game.Start());
+            Assert.Throws<GameAlreadyStartedException>(() => game.Start());
         }
     }
 }

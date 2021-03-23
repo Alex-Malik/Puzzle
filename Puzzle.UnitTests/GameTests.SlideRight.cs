@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Puzzle.Exceptions;
 
 namespace Puzzle.UnitTests
 {
@@ -11,7 +12,7 @@ namespace Puzzle.UnitTests
         {
             var game = new Game(MockSquareFactory().Object);
 
-            Assert.Throws<Exception>(() => game.SlideRight());
+            Assert.Throws<GameNotStartedException>(() => game.SlideRight());
         }
         
         [Test]

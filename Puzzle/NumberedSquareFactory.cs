@@ -2,7 +2,7 @@
 
 namespace Puzzle
 {
-    class NumberedSquareFactory : ISquareFactory
+    public class NumberedSquareFactory : ISquareFactory
     {
         private const int PositionMin = 0;
         private const int PositionMax = 15;

@@ -3,12 +3,12 @@
     /// <summary>
     /// Represents a square instance that uses a number as a value to display itself.
     /// </summary>
-    class NumberedSquare : Square
+    public class NumberedSquare : Square
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberedSquare"/> class.
         /// </summary>
-        public NumberedSquare(int correctPosition) : base(correctPosition)
+        protected internal NumberedSquare(int correctPosition) : base(correctPosition)
         {
             DisplayNumber = (correctPosition + 1).ToString();
         }

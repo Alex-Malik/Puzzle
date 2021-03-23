@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Puzzle
@@ -17,7 +18,7 @@ namespace Puzzle
         private readonly int _horizontalSlideOffset;
 
         // Game variables.
-        public Square[] _board;
+        private Square[] _board;
         private int _emptySquarePosition;
 
         /// <summary>
@@ -32,6 +33,8 @@ namespace Puzzle
             _verticalSlideOffset = 4;
             _horizontalSlideOffset = 1;
         }
+
+        public IEnumerable<Square> Board => _board.ToArray();
 
         /// <summary>
         /// Starts the game by generating the squares in random places leaving one empty square.

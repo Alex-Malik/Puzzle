@@ -1,7 +1,5 @@
-using System;
 using System.Linq;
 using Moq;
-using NUnit.Framework;
 
 namespace Puzzle.UnitTests
 {
@@ -10,59 +8,12 @@ namespace Puzzle.UnitTests
     /// </summary>
     public partial class GameTests
     {
-        [Test]
-        public void Ctor_AsUsual()
-        {
-            var game = new Game(Mock.Of<ISquareFactory>());
-            
-            Assert.IsEmpty(game.Board);
-            Assert.IsFalse(game.IsFinished);
-        }
+        // This part of this partial class contains all private methods
+        // that are used by test methods in other parts of the class.
         
-        [Test]
-        public void Start_AsUsual_CreatesBoardWithSquares()
-        {
-            var game = new Game(MockSquareFactory().Object);
-            
-            game.Start();
-            
-            Assert.IsNotNull(game.Board);
-            Assert.IsNotEmpty(game.Board);
-            Assert.IsFalse(game.IsFinished);
-        }
-        
-        [Test]
-        public void Start_AsUsual_UsesGivenFactory()
-        {
-            var mockedFactory = MockSquareFactory();
-            var game = new Game(mockedFactory.Object);
-            
-            game.Start();
-            
-            mockedFactory.Verify(squareFactory => squareFactory.CreateByPosition(It.IsAny<int>()));
-        }
-        
-        [Test]
-        public void Start_AsUsual_Generates15SquaresAndOneEmpty()
-        {
-            var game = new Game(MockSquareFactory().Object);
-            
-            game.Start();
-            
-            Assert.IsTrue(game.Board.Count(square => square != null) == 15);
-            Assert.IsTrue(game.Board.Count(square => square == null) == 1);
-        }
-
-        [Test]
-        public void Start_AlreadyStarted_ThrowsAnException()
-        {
-            var game = new Game(MockSquareFactory().Object);
-            
-            game.Start();
-
-            Assert.Throws<Exception>(() => game.Start());
-        }
-
+        /// <summary>
+        /// Mocks randomizer to control the order of squares.
+        /// </summary>
         private Mock<IRandomizer> MockRandomizer(params int[] positions)
         {
             var mockedRandomizer = new Mock<IRandomizer>();
@@ -73,6 +24,9 @@ namespace Puzzle.UnitTests
             return mockedRandomizer;
         }
 
+        /// <summary>
+        /// Mocks square factory to produce fake square objects.
+        /// </summary>
         private Mock<ISquareFactory> MockSquareFactory()
         {
             var mockedSquareFactory = new Mock<ISquareFactory>();
@@ -82,17 +36,21 @@ namespace Puzzle.UnitTests
             
             return mockedSquareFactory;
         }
-    }
-
-    class FakeSquare : Square
-    {
-        public FakeSquare(int correctPosition) : base(correctPosition)
-        {
-        }
         
         /// <summary>
-        /// Overrides ToString() to show a DisplayNumber.
+        /// Represents a Square class implementation that is used by unit tests.
         /// </summary>
-        public override string ToString() => CorrectPosition.ToString();
+        private class FakeSquare : Square
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="FakeSquare"/> class.
+            /// </summary>
+            public FakeSquare(int correctPosition) : base(correctPosition) { }
+        
+            /// <summary>
+            /// Overrides ToString() to show a DisplayNumber.
+            /// </summary>
+            public override string ToString() => CorrectPosition.ToString();
+        }
     }
 }

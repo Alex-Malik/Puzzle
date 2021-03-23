@@ -17,5 +17,10 @@
         /// Gets the number that should be displayed for that square.
         /// </summary>
         public string DisplayNumber { get; }
+
+        /// <summary>
+        /// Overrides ToString() to show a DisplayNumber.
+        /// </summary>
+        public override string ToString() => DisplayNumber;
     }
 }

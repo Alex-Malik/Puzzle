@@ -121,15 +121,8 @@ namespace Puzzle
 
         private void Verify()
         {
-            // TODO Very strange method that is about to be rewrited...
-            
-            for (int i = 0; i < _boardSize; i++)
-            {
-                if (_board[i] == null) return;
-                if (_board[i].CorrectPosition != i) return;
-            }
-
-            throw new Exception("You won!");
+            if (_board.Last() == null)
+                throw new Exception("You won!");
         }
         
         private enum GameState

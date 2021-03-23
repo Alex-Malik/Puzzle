@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// Represents an interface for classes that are intended to randomize some values.
+    /// Could be used to implement different difficulty levels controlling the sequence.
     /// </summary>
     public interface IRandomizer
     {

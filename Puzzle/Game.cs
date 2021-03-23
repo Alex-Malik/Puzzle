@@ -5,7 +5,8 @@ using Puzzle.Exceptions;
 namespace Puzzle
 {
     /// <summary>
-    /// Represent the game logic with all game mechanics.
+    /// Represent the game logic with all game mechanics. This class is the entry
+    /// point to the business logic of the app.
     /// </summary>
     public class Game
     {
@@ -34,7 +35,9 @@ namespace Puzzle
             _squareFactory = squareFactory;
             _randomizer = randomizer ?? new DefaultRandomizer();
 
-            // In case some time the size of the board will be bigger.
+            // In case if some time the size of the board will be bigger then 
+            // the main logic will not change, and only constructor should be
+            // extended to support custom width and height.
             _boardWidth = DefaultBoardWidth;
             _boardHeight = DefaultBoardHeight;
             

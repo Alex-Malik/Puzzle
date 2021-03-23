@@ -57,28 +57,5 @@ namespace Puzzle.UnitTests
             Assert.IsNull(game.Board.ToArray()[1]);
             Assert.IsTrue(game.Board.Count(square => square != null) == 15);
         }
-        
-        [Test]
-        public void SlideDown_LastSlideToWon_GameWon()
-        {
-            var initialSequence = new[]
-            {
-                0,  1,  2,  3,
-                4,  5,  6,  7,
-                8,  9,  10, 11,
-                12, 13, 14,     15 // - the last index is the empty square position
-            };
-
-            var game = new Game(
-                MockSquareFactory().Object,
-                MockRandomizer(initialSequence).Object);
-            
-            game.Start();
-            game.SlideDown();
-            game.SlideUp();
-            game.SlideDown();
-            
-            Assert.IsTrue(game.IsFinished);
-        }
     }
 }

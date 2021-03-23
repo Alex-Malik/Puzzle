@@ -78,7 +78,7 @@ namespace Puzzle.UnitTests
             game.SlideDown();
             game.SlideUp();
             
-            
+            Assert.IsTrue(game.IsFinished);
         }
     }
 }

@@ -36,6 +36,7 @@ namespace Puzzle
         }
 
         public IEnumerable<Square> Board => _board?.ToArray() ?? Enumerable.Empty<Square>();
+        public bool IsFinished { get; private set; } = false;
 
         /// <summary>
         /// Starts the game by generating the squares in random places leaving one empty square.
@@ -121,15 +122,7 @@ namespace Puzzle
 
         private void Verify()
         {
-            if (_board.Last() == null)
-                throw new Exception("You won!");
-        }
-        
-        private enum GameState
-        {
-            Waiting,
-            Started,
-            Finished
+            if (_board.Last() == null) IsFinished = true;
         }
     }
 }

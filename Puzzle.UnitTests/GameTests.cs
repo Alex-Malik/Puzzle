@@ -16,6 +16,7 @@ namespace Puzzle.UnitTests
             var game = new Game(Mock.Of<ISquareFactory>());
             
             Assert.IsEmpty(game.Board);
+            Assert.IsFalse(game.IsFinished);
         }
         
         [Test]
@@ -27,6 +28,7 @@ namespace Puzzle.UnitTests
             
             Assert.IsNotNull(game.Board);
             Assert.IsNotEmpty(game.Board);
+            Assert.IsFalse(game.IsFinished);
         }
         
         [Test]

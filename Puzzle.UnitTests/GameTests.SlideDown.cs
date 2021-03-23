@@ -15,7 +15,7 @@ namespace Puzzle.UnitTests
         }
         
         [Test]
-        public void SlideDown_HasSpaceToSlide_SlidesUp()
+        public void SlideDown_HasSpaceToSlide_SlidesDown()
         {
             var initialSequence = new[]
             {

@@ -34,7 +34,7 @@ namespace Puzzle
             _horizontalSlideOffset = 1;
         }
 
-        public IEnumerable<Square> Board => _board.ToArray();
+        public IEnumerable<Square> Board => _board?.ToArray() ?? Enumerable.Empty<Square>();
 
         /// <summary>
         /// Starts the game by generating the squares in random places leaving one empty square.

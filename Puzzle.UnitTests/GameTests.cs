@@ -61,14 +61,24 @@ namespace Puzzle.UnitTests
             Assert.Throws<Exception>(() => game.Start());
         }
 
+        private Mock<IRandomizer> MockRandomizer(params int[] positions)
+        {
+            var mockedRandomizer = new Mock<IRandomizer>();
+            mockedRandomizer
+                .Setup(randomizer => randomizer.GenerateRandomSequence(It.IsAny<int>()))
+                .Returns<int>(length => positions.ToArray());
+
+            return mockedRandomizer;
+        }
+
         private Mock<ISquareFactory> MockSquareFactory()
         {
-            var mockedFactory = new Mock<ISquareFactory>();
-            mockedFactory
+            var mockedSquareFactory = new Mock<ISquareFactory>();
+            mockedSquareFactory
                 .Setup(squareFactory => squareFactory.CreateByPosition(It.IsAny<int>()))
                 .Returns<int>(targetPosition => new FakeSquare(targetPosition));
-
-            return mockedFactory;
+            
+            return mockedSquareFactory;
         }
     }
 
@@ -77,5 +87,10 @@ namespace Puzzle.UnitTests
         public FakeSquare(int correctPosition) : base(correctPosition)
         {
         }
+        
+        /// <summary>
+        /// Overrides ToString() to show a DisplayNumber.
+        /// </summary>
+        public override string ToString() => CorrectPosition.ToString();
     }
 }

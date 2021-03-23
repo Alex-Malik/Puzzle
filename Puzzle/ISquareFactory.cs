@@ -1,6 +1,6 @@
 ﻿namespace Puzzle
 {
-    interface ISquareFactory
+    public interface ISquareFactory
     {
         Square CreateByPosition(int position);
     }

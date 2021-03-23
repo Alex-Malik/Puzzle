@@ -6,7 +6,7 @@ namespace Puzzle
     /// <summary>
     /// Represent the game logic with all game mechanics.
     /// </summary>
-    class Game
+    public class Game
     {
         // Dependencies.
         private readonly ISquareFactory _squareFactory;

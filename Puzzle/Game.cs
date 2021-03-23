@@ -11,6 +11,7 @@ namespace Puzzle
     {
         // Dependencies.
         private readonly ISquareFactory _squareFactory;
+        private readonly IRandomizer _randomizer;
 
         // Game settings.
         private readonly int _boardSize;
@@ -24,10 +25,10 @@ namespace Puzzle
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class. If no arguments provided the default values will be used.
         /// </summary>
-        /// <param name="squareFactory"></param>
-        public Game(ISquareFactory squareFactory)
+        public Game(ISquareFactory squareFactory, IRandomizer randomizer = null)
         {
             _squareFactory = squareFactory;
+            _randomizer = randomizer ?? new DefaultRandomizer();
 
             _boardSize = 4 * 4;
             _verticalSlideOffset = 4;
@@ -42,8 +43,7 @@ namespace Puzzle
         public void Start()
         {
             // Init random positions sequence.
-            var random = new Random();
-            var randomPositions = Enumerable.Range(0, _boardSize).OrderBy(_ => random.Next()).ToArray();
+            var randomPositions = _randomizer.GenerateRandomSequence(_boardSize);
 
             // Init empty squares board.
             _board = new Square[_boardSize];

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Puzzle.Terminal
 {
@@ -15,7 +17,7 @@ namespace Puzzle.Terminal
 
             do
             {
-                DisplayBoard(game._board);
+                DisplayBoard(game.Board);
                 
                 var input = Console.ReadKey();
                 if (input.Key == ConsoleKey.Q) break;
@@ -33,15 +35,18 @@ namespace Puzzle.Terminal
             } while (true);
         }
 
-        static void DisplayBoard(Square[] board)
+        static void DisplayBoard(IEnumerable<Square> board)
         {
+            if (board != null && !board.Any()) return;
+            var boardArray = board.ToArray();
+
             Console.Clear();
             Console.WriteLine();
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    var square = board[i * 4 + j] as NumberedSquare;
+                    var square = boardArray[i * 4 + j] as NumberedSquare;
                     Console.Write($"{square?.DisplayNumber.PadLeft(2) ?? "  "} ");
                 }
 

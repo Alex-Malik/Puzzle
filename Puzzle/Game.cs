@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Puzzle.Exceptions;
 
@@ -15,11 +14,15 @@ namespace Puzzle
         private readonly IRandomizer _randomizer;
 
         // Game settings.
+        private readonly int _boardWidth;
+        private readonly int _boardHeight;
         private readonly int _boardSize;
         private readonly int _verticalSlideOffset;
         private readonly int _horizontalSlideOffset;
 
-        // Game variables.
+        // Game constants & variables.
+        private const int DefaultBoardWidth = 4;
+        private const int DefaultBoardHeight = 4;
         private Square[] _board;
         private int _emptySquarePosition;
 
@@ -31,12 +34,23 @@ namespace Puzzle
             _squareFactory = squareFactory;
             _randomizer = randomizer ?? new DefaultRandomizer();
 
-            _boardSize = 4 * 4;
-            _verticalSlideOffset = 4;
+            // In case some time the size of the board will be bigger.
+            _boardWidth = DefaultBoardWidth;
+            _boardHeight = DefaultBoardHeight;
+            
+            _boardSize = _boardWidth * _boardHeight;
+            _verticalSlideOffset = _boardWidth;
             _horizontalSlideOffset = 1;
         }
 
+        /// <summary>
+        /// Gets a collection of the squares that represents the game board.
+        /// </summary>
         public IEnumerable<Square> Board => _board?.ToArray() ?? Enumerable.Empty<Square>();
+        
+        /// <summary>
+        /// Gets a value indicating whether or not the game is finished.
+        /// </summary>
         public bool IsFinished { get; private set; } = false;
 
         /// <summary>
@@ -84,7 +98,7 @@ namespace Puzzle
             if (IsFinished)
                 throw new GameFinishedException();
             if (_emptySquarePosition + _verticalSlideOffset >= _boardSize)
-                return; // Or throw an exception...
+                return;
 
             Slide(_emptySquarePosition + _verticalSlideOffset);
             Verify();
@@ -100,7 +114,7 @@ namespace Puzzle
             if (IsFinished)
                 throw new GameFinishedException();
             if (_emptySquarePosition - _verticalSlideOffset < 0)
-                return; // Or throw an exception...
+                return;
 
             Slide(_emptySquarePosition - _verticalSlideOffset);
             Verify();

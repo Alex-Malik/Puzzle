@@ -3,8 +3,14 @@ using System.Linq;
 
 namespace Puzzle
 {
+    /// <summary>
+    /// Represents a default mechanism to randomize a sequence of the sequential numbers.
+    /// </summary>
     internal class DefaultRandomizer : IRandomizer
     {
+        /// <summary>
+        /// Generates a sequence of the numbers and randomizes their order.
+        /// </summary>
         public int[] GenerateRandomSequence(int length)
         {
             if (length <= 0)

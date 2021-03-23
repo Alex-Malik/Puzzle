@@ -14,7 +14,8 @@
         }
 
         /// <summary>
-        /// Gets the correct position of the square.
+        /// Gets the correct position of the square. That is the place where the
+        /// square should appear to successfully finish the game.
         /// </summary>
         public int CorrectPosition { get; }
     }

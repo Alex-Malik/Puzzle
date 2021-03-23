@@ -42,12 +42,10 @@ namespace Puzzle.Terminal
                     game.Restart();
                 else
                     continue;
-                
-                if (game.IsFinished)
-                {
-                    Console.WriteLine("Congratulations! You did everything right.");
-                    return;
-                }
+
+                if (!game.IsFinished) continue;
+                Console.WriteLine("Congratulations! You did everything right.");
+                return;
             } while (true);
         }
 

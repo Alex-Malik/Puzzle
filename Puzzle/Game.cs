@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Puzzle.Exceptions;
 
 namespace Puzzle
 {
@@ -43,6 +44,9 @@ namespace Puzzle
         /// </summary>
         public void Start()
         {
+            if (_board != null && _board.Any())
+                throw new GameAlreadyStartedException();
+            
             // Init random positions sequence.
             var randomPositions = _randomizer.GenerateRandomSequence(_boardSize);
 
@@ -61,10 +65,24 @@ namespace Puzzle
         }
 
         /// <summary>
+        /// Restarts the current game. This action will erase all progress.
+        /// </summary>
+        public void Restart()
+        {
+            _board = null;
+            IsFinished = false;
+            Start();
+        }
+
+        /// <summary>
         /// Slides up the square that is under the empty place to that empty place.
         /// </summary>
         public void SlideUp()
         {
+            if (_board == null || !_board.Any())
+                throw new GameNotStartedException();
+            if (IsFinished)
+                throw new GameFinishedException();
             if (_emptySquarePosition + _verticalSlideOffset >= _boardSize)
                 return; // Or throw an exception...
 
@@ -77,6 +95,10 @@ namespace Puzzle
         /// </summary>
         public void SlideDown()
         {
+            if (_board == null || !_board.Any())
+                throw new GameNotStartedException();
+            if (IsFinished)
+                throw new GameFinishedException();
             if (_emptySquarePosition - _verticalSlideOffset < 0)
                 return; // Or throw an exception...
 
@@ -89,6 +111,10 @@ namespace Puzzle
         /// </summary>
         public void SlideRight()
         {
+            if (_board == null || !_board.Any())
+                throw new GameNotStartedException();
+            if (IsFinished)
+                throw new GameFinishedException();
             if (_emptySquarePosition % 4 - _horizontalSlideOffset < 0)
                 return; // Or throw an exception...
             
@@ -101,6 +127,10 @@ namespace Puzzle
         /// </summary>
         public void SlideLeft()
         {
+            if (_board == null || !_board.Any())
+                throw new GameNotStartedException();
+            if (IsFinished)
+                throw new GameFinishedException();
             if (_emptySquarePosition % 4 + _horizontalSlideOffset >= 4)
                 return; // Or throw an exception...
 
@@ -120,8 +150,16 @@ namespace Puzzle
             _emptySquarePosition = squareToSlidePosition;
         }
 
+        /// <summary>
+        /// Verifies if the game is finished.
+        /// </summary>
         private void Verify()
         {
+            for (int i = 0; i < _boardSize - 1; i++)
+            {
+                if (_board[i] == null) return;
+                if (_board[i].CorrectPosition != i) return;
+            }
             if (_board.Last() == null) IsFinished = true;
         }
     }
